@@ -15,7 +15,7 @@ public class DriverManager {
         capabilities.setCapability( "platformName",ConfigReader.getValue("platformName"));
         capabilities.setCapability( "deviceName",ConfigReader.getValue("deviceName"));
         capabilities.setCapability( "automationName",ConfigReader.getValue("automationName"));
-        capabilities.setCapability( "app",System.getProperty("user.dir") + ConfigReader.getValue("appPath"));
+        capabilities.setCapability( "app",System.getProperty("user.dir")+ConfigReader.getValue("appPath"));
         capabilities.setCapability( "appActivity",ConfigReader.getValue("appActivity"));
         capabilities.setCapability( "appPackage",ConfigReader.getValue("appPackage"));
 
