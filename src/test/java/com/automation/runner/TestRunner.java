@@ -10,6 +10,9 @@ import org.junit.runner.RunWith;
         glue = "com.automation.steps",
         plugin = "json:target/cucumber.json"
 
+
+        ,dryRun = true
+
 )
 public class TestRunner {
 }
