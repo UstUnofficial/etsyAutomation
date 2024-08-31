@@ -5,20 +5,41 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
 
-    @FindBy(id = "com.etsy.android:id/cancelText")
-    WebElement continueAsGuest;
+    @FindBy(xpath = "//android.widget.TextView[@text='Get started']")
+    WebElement getStartedBtn;
 
-    @FindBy(id = "com.etsy.android:id/empty_view_tertiary_button")
-    WebElement locationSkip;
+    @FindBy(xpath = "//android.widget.Button[@text='Skip']")
+    WebElement skipIcon;
+
+    @FindBy(xpath = "//android.view.View[@content-desc='Allow location access,Button,Allow location access']")
+    WebElement enterLocationTab;
+
+    @FindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
+    WebElement whileUsingTheApp;
+
+    @FindBy(id = "in.swiggy.android:id/not_now")
+    WebElement notificationNotNow;
 
     public void openApplication() {
-        if (isDisplayed(continueAsGuest)) {
-            continueAsGuest.click();
-            if (isPresent(locationSkip)) {
-                locationSkip.click();
-
-            }
+        if (isDisplayed(getStartedBtn)) {
+            getStartedBtn.click();
         }
+        if (isDisplayed(skipIcon)) {
+            skipIcon.click();
+        }
+        if (isDisplayed(enterLocationTab)) {
+            enterLocationTab.click();
+        }
+        if (isDisplayed(whileUsingTheApp)) {
+            whileUsingTheApp.click();
+        }
+        if(isDisplayed(notificationNotNow)){
+            notificationNotNow.click();
+        }
+    }
+
+    public void setUp() {
+
 
     }
 }

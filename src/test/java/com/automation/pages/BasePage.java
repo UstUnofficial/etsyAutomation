@@ -38,7 +38,7 @@ public class BasePage {
 
         } finally {
 
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 
         }
     }

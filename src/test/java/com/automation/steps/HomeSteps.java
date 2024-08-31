@@ -10,6 +10,7 @@ public class HomeSteps {
     @Given("user opens the application")
     public void user_opens_the_application() {
         homePage.openApplication();
+        homePage.setUp();
 
     }
 
