@@ -9,7 +9,9 @@ import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class BasePage {
     AppiumDriver driver;
@@ -60,8 +62,16 @@ public class BasePage {
 
         driver.perform(Collections.singleton(sequence));
 
-        return;
+    }
 
+    public List<WebElement> scrollTillAndGet(WebElement tillElement, WebElement getElement){
+        List<WebElement> returnElement = new ArrayList<>();
+
+        while(!isPresent(tillElement)){
+            returnElement.add(getElement);
+        }
+        
+        return returnElement;
     }
 
 }
