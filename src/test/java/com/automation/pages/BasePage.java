@@ -73,6 +73,7 @@ public class BasePage {
             returnElement.add(getElement);
         }
 
+        System.out.println("test");
         return returnElement;
     }
 
