@@ -16,13 +16,12 @@ import java.util.List;
 public class BasePage {
     AppiumDriver driver;
 
-    public BasePage(){
-
+    public BasePage() {
         driver = DriverManager.getDriver();
         PageFactory.initElements(driver, this);
     }
 
-    public boolean isDisplayed(WebElement element){
+    public boolean isDisplayed(WebElement element) {
 
         try {
             return element.isDisplayed();
@@ -32,14 +31,14 @@ public class BasePage {
 
     }
 
-    public boolean isPresent(WebElement element){
+    public boolean isPresent(WebElement element) {
         try {
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+            System.out.println(element.isDisplayed());
             return element.isDisplayed();
 
         } catch (Exception e) {
-
             return false;
 
         } finally {
@@ -49,28 +48,31 @@ public class BasePage {
         }
     }
 
-    public void scrollOrSwipe(int startX , int startY, int endX, int endY){
+    public void scrollOrSwipe(int startX, int startY, int endX, int endY) {
+
+//        System.out.println(startX + " " + startY);
+//        System.out.println(endX + " " + endY);
 
         PointerInput finger1 = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
 
         Sequence sequence = new Sequence(finger1, 1)
                 .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
                 .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
-                .addAction(new Pause(finger1, Duration.ofMillis(500)))
-                .addAction(finger1.createPointerMove(Duration.ofMillis(500), PointerInput.Origin.viewport(), endX, endY))
+                .addAction(new Pause(finger1, Duration.ofSeconds(2)))
+                .addAction(finger1.createPointerMove(Duration.ofSeconds(1), PointerInput.Origin.viewport(), endX, endY))
                 .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         driver.perform(Collections.singleton(sequence));
 
     }
 
-    public List<WebElement> scrollTillAndGet(WebElement tillElement, WebElement getElement){
+    public List<WebElement> scrollTillAndGet(WebElement tillElement, WebElement getElement) {
         List<WebElement> returnElement = new ArrayList<>();
 
-        while(!isPresent(tillElement)){
+        while (!isPresent(tillElement)) {
             returnElement.add(getElement);
         }
-        
+
         return returnElement;
     }
 

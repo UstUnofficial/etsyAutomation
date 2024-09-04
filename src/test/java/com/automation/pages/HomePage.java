@@ -1,77 +1,54 @@
 package com.automation.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage extends BasePage {
 
-    @FindBy(xpath = "//android.widget.TextView[@text='Get started']")
-    WebElement getStartedBtn;
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Close']")
+    WebElement closeIcon;
 
-    @FindBy(xpath = "//android.widget.Button[@text='Skip']")
-    WebElement skipIcon;
+    @FindBy(xpath = "//android.widget.TextView[@content-desc='Search Keyword Search on eBay']")
+    WebElement searchTab;
 
-    @FindBy(xpath = "//android.view.View[@content-desc='Allow location access,Button,Allow location access']")
-    WebElement enterLocationTab;
 
-    @FindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
-    WebElement whileUsingTheApp;
+    @FindBy(id = "com.ebay.mobile:id/home_pill")
+    List<WebElement> listOfCategory;
 
-    @FindBy(id = "in.swiggy.android:id/not_now")
-    WebElement notificationNotNow;
-
-    @FindBy(id = "in.swiggy.android:id/m_n_image_spec_id")
-    List<WebElement> crazyDeals;
-    public static int crazyDealsSize;
-
-    @FindBy(id = "in.swiggy.android:id/layout_image_inflateId")
-    WebElement foodSelectorTab;
+    @FindBy(xpath = "//android.widget.Button[@resource-id='com.ebay.mobile:id/home_pill' and @text = 'Categories']")
+    WebElement categoryElement;
 
     public void openApplication() {
-        if (isDisplayed(getStartedBtn)) {
-            getStartedBtn.click();
-        }
-        if (isDisplayed(skipIcon)) {
-            skipIcon.click();
-        }
-        if (isDisplayed(enterLocationTab)) {
-            enterLocationTab.click();
-        }
-        if (isDisplayed(whileUsingTheApp)) {
-            whileUsingTheApp.click();
-        }
-        if(isDisplayed(notificationNotNow)){
-            notificationNotNow.click();
+        if (isDisplayed(closeIcon)) {
+            closeIcon.click();
         }
     }
 
-    public void setUp() {
-
-
+    public boolean isHomePageDispalyed() {
+        return isDisplayed(searchTab);
     }
 
-    public void goToCrazyDeals() {
 
-        crazyDeals.get(1).click();
-    }
+    public void clickOnCategories() {
+        List<WebElement> currentCardList = driver.findElements(By.xpath("//android.widget.Button[@resource-id='com.ebay.mobile:id/home_pill' and @text]"));
 
-    public void goToFoodSection() {
-        foodSelectorTab.click();
+        int x = currentCardList.get(0).getLocation().getX();
+        int y = currentCardList.get(0).getLocation().getY();
+        int cardWidth = currentCardList.get(0).getSize().getWidth();
+        int cardHeight = currentCardList.get(0).getSize().getHeight();
 
-    }
+        while (!isPresent(categoryElement)) {
 
-    public boolean isCrazyDealNavigatorDisplayed() {
-        crazyDealsSize = crazyDeals.size();
-        return !crazyDeals.isEmpty();
-    }
+            scrollOrSwipe(x + cardWidth, y + cardHeight / 2, 0, y + cardHeight / 2);
 
-    public void clickOnCrazyDeals(int i) {
-        crazyDeals.get(i).click();
-    }
-
-    public boolean isCrazyDealPageOpened(int i) {
-        return false;
+            currentCardList = driver.findElements(By.xpath("//android.widget.Button[@resource-id='com.ebay.mobile:id/home_pill' and @text]"));
+        }
+        categoryElement.click();
     }
 }
+
+

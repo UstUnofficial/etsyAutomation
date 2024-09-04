@@ -24,7 +24,7 @@ public class DriverManager {
         driver = new AndroidDriver(capabilities);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
-        driver.setLocation(new Location(8.5, 76.9, 100));
+        driver.setLocation(new Location(8.51, 76.88, 100));
 
     }
 
