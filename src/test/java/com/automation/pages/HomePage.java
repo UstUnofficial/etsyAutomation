@@ -43,7 +43,7 @@ public class HomePage extends BasePage {
 
         while (!isPresent(categoryElement)) {
 
-            scrollOrSwipe(x + cardWidth, y + cardHeight / 2, 0, y + cardHeight / 2);
+            scrollOrSwipe(2*(x + cardWidth), y + cardHeight / 2, 0, y + cardHeight / 2);
 
             currentCardList = driver.findElements(By.xpath("//android.widget.Button[@resource-id='com.ebay.mobile:id/home_pill' and @text]"));
         }
