@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         plugin = "json:target/cucumber.json"
 
 
-        ,dryRun = true
+//        ,dryRun = true
 
 )
 public class TestRunner {
