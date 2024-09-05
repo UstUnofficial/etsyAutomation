@@ -22,6 +22,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//android.widget.Button[@resource-id='com.ebay.mobile:id/home_pill' and @text = 'Categories']")
     WebElement categoryElement;
 
+
     public void openApplication() {
         if (isDisplayed(closeIcon)) {
             closeIcon.click();
@@ -49,6 +50,17 @@ public class HomePage extends BasePage {
         }
         categoryElement.click();
     }
+
+    public void clickOnNavigationTab(String tabOption) {
+        String xpath = "//android.widget.TextView[@text= '%s']";
+        xpath = String.format(xpath, tabOption);
+
+        driver.findElement(By.xpath(xpath)).click();
+
+
+    }
+
+
 }
 
 
