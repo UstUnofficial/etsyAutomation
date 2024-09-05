@@ -1,6 +1,7 @@
 package com.automation.steps;
 
 import com.automation.pages.HomePage;
+import com.automation.utils.ConfigReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -25,4 +26,13 @@ public class HomeSteps {
        homePage.clickOnCategories();
     }
 
+    @When("user search for product {string}")
+    public void userSearchForProduct(String productName) {
+        homePage.searchProduct(ConfigReader.getValue(productName));
+    }
+
+    @When("user search for product laptop {string}")
+    public void userSearchForProductLaptop(String productName) {
+        homePage.searchProduct(productName);
+    }
 }
