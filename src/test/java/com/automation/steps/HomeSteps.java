@@ -35,4 +35,12 @@ public class HomeSteps {
     public void userSearchForProductLaptop(String productName) {
         homePage.searchProduct(productName);
     }
+
+    @When("user clicks on {string}")
+    public void user_clicks_on(String tabOption) {
+
+        homePage.clickOnNavigationTab(tabOption);
+        
+    }
+
 }

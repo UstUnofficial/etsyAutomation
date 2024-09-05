@@ -22,11 +22,13 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//android.widget.Button[@resource-id='com.ebay.mobile:id/home_pill' and @text = 'Categories']")
     WebElement categoryElement;
 
+
     @FindBy(xpath = "//android.widget.TextView[@resource-id='com.ebay.mobile:id/search_suggestion_text']")
     List<WebElement> searchedProductNameList;
 
     @FindBy(xpath = "//android.widget.AutoCompleteTextView[@text='Search on eBay']")
     WebElement searchBar;
+
 
     public void openApplication() {
         if (isDisplayed(closeIcon)) {
@@ -49,7 +51,7 @@ public class HomePage extends BasePage {
 
         while (!isPresent(categoryElement)) {
 
-            scrollOrSwipe(x + cardWidth, y + cardHeight / 2, 0, y + cardHeight / 2);
+            scrollOrSwipe(2*(x + cardWidth), y + cardHeight / 2, 0, y + cardHeight / 2);
 
             currentCardList = driver.findElements(By.xpath("//android.widget.Button[@resource-id='com.ebay.mobile:id/home_pill' and @text]"));
         }
@@ -62,6 +64,17 @@ public class HomePage extends BasePage {
         searchedProductNameList.get(0).click();
 
     }
+
+    public void clickOnNavigationTab(String tabOption) {
+        String xpath = "//android.widget.TextView[@text= '%s']";
+        xpath = String.format(xpath, tabOption);
+
+        driver.findElement(By.xpath(xpath)).click();
+
+
+    }
+
+
 }
 
 
