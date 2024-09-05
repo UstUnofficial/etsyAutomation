@@ -16,6 +16,7 @@ import java.util.List;
 public class BasePage {
     AppiumDriver driver;
 
+
     public BasePage() {
         driver = DriverManager.getDriver();
         PageFactory.initElements(driver, this);

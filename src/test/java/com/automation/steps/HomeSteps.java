@@ -25,4 +25,14 @@ public class HomeSteps {
        homePage.clickOnCategories();
     }
 
+
+    @When("user clicks on {string}")
+    public void user_clicks_on(String tabOption) {
+
+        homePage.clickOnNavigationTab(tabOption);
+        
+    }
+
+
+
 }
