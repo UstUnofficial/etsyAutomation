@@ -32,10 +32,17 @@ public class ProductListingSteps {
 
 
 
+
     @When("user apply laptop filter option {string}")
     public void userApplyLaptopFilterOption(String category) {
         productListingPage.laptopFiltering(category);
     }
+
+//    @When("user apply filter option {string}")
+//    public void userApplyFilterOption(String category) {
+//        productListingPage.LaptopFiltering(category);
+//    }
+
 
     @And("user apply subCategory {string} from category")
     public void userApplySubCategoryFromCategory(String subCategory) {
@@ -57,11 +64,32 @@ public class ProductListingSteps {
         productListingPage.clickOnSearchBtn();
     }
 
+    @When("user apply filter option {string}")
+    public void user_apply_filter_option(String filter) {
+        productListingPage.filter(filter);
+
+    }
+
+
+    @When("user sorts with {string}")
+    public void userSortsWith(String sortingOption) {
+        productListingPage.sortWith(ConfigReader.getValue(sortingOption));
+    }
+
+    @Then("verify price is sorted in {string} order")
+    public void verifyPriceIsSortedInOrder(String sortingOption) {
+        Assert.assertTrue(productListingPage.isPriceSortedIn(ConfigReader.getValue(sortingOption)));
+
+    }
+
+    @Then("verify price is sorted not in {string} order")
+    public void verifyPriceIsSortedNotInOrder(String sortingOption) {
+
+        Assert.assertFalse(productListingPage.isPriceSortedIn(ConfigReader.getValue(sortingOption)));
+    }
     @Then("verify the product are displayed contains {string}  and {string} based on filtering")
     public void verifyTheProductAreDisplayedContainsAndBasedOnFiltering(String data1, String data2) {
         Assert.assertTrue(productListingPage.isLaptopFilteredByTwoCondition(ConfigReader.getValue(data1),ConfigReader.getValue(data2)));
-
-
 
     }
 

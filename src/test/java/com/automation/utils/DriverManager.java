@@ -19,6 +19,7 @@ public class DriverManager {
         capabilities.setCapability( "app",System.getProperty("user.dir")+ConfigReader.getValue("appPath"));
         capabilities.setCapability( "appActivity",ConfigReader.getValue("appActivity"));
         capabilities.setCapability( "appPackage",ConfigReader.getValue("appPackage"));
+        capabilities.setCapability("autoGrandPermission", "true");
 
 
         driver = new AndroidDriver(capabilities);
@@ -28,7 +29,7 @@ public class DriverManager {
 
     }
 
-    public static AppiumDriver getDriver(){
+    public static AndroidDriver getDriver(){
         return driver;
     }
 
