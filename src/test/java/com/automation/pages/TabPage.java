@@ -22,7 +22,8 @@ public class TabPage extends BasePage{
     @FindBy(xpath = "//android.widget.TextView[@text=\"Settings\"]")
     WebElement settingsLink;
 
-
+    @FindBy(xpath = "//android.widget.TextView[@text=\"Watchlist\"]")
+    WebElement watchlistLink;
 
 
 
@@ -65,6 +66,11 @@ public class TabPage extends BasePage{
 
         }
         settingsLink.click();
+
+    }
+
+    public void clickOnWatchlist() {
+        watchlistLink.click();
 
     }
 }

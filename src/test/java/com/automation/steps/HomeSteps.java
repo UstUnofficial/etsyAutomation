@@ -42,5 +42,4 @@ public class HomeSteps {
         homePage.clickOnNavigationTab(tabOption);
         
     }
-
 }

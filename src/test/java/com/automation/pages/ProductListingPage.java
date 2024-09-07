@@ -2,6 +2,7 @@ package com.automation.pages;
 
 import com.automation.utils.ConfigReader;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,6 +28,9 @@ public class ProductListingPage extends  BasePage{
 
     @FindBy(xpath = "//android.widget.ImageButton[@content-desc='Back to all refinements']")
     WebElement filterBackButton;
+
+    @FindBy(xpath = "//android.view.ViewGroup[@resource-id='com.ebay.mobile:id/cell_collection_item']")
+    List<WebElement> firstProduct;
 
 
     public  void clickOnNotification(){
@@ -85,7 +89,7 @@ public class ProductListingPage extends  BasePage{
 
     }
 
-    public void LaptopFiltering(String filterCategory) {
+    public void laptopFiltering(String filterCategory) {
 
         if(isPresent(filterTab)){
             filterTab.click();
@@ -177,5 +181,18 @@ public class ProductListingPage extends  BasePage{
         if(isDisplayed(showResultBtn)){
             showResultBtn.click();
         }
+    }
+
+    public void clickOnFirstProduct() {
+        firstProduct.get(0).click();
+    }
+
+    public void clickOnSecondProduct() {
+        Dimension dimension=driver.manage().window().getSize();
+        int width = dimension.getWidth();
+        int height = dimension.getHeight();
+
+        scrollOrSwipe(width/2,height/2,width/2,0);
+        firstProduct.get(1).click();
     }
 }

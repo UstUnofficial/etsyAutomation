@@ -32,9 +32,9 @@ public class ProductListingSteps {
 
 
 
-    @When("user apply filter option {string}")
-    public void userApplyFilterOption(String category) {
-        productListingPage.LaptopFiltering(category);
+    @When("user apply laptop filter option {string}")
+    public void userApplyLaptopFilterOption(String category) {
+        productListingPage.laptopFiltering(category);
     }
 
     @And("user apply subCategory {string} from category")
@@ -64,4 +64,27 @@ public class ProductListingSteps {
 
 
     }
+
+    @And("user select color as {string}")
+    public void userSelectColorAs(String arg0) {
+    }
+
+    @And("user select gender as {string}")
+    public void userSelectGenderAs(String arg0) {
+    }
+
+    @And("user click on first product")
+    public void userClickOnFirstProduct() {
+        productListingPage.clickOnFirstProduct();
+
+    }
+    @And("user click on second product")
+    public void userClickOnSecondProduct() {
+
+
+
+        productListingPage.clickOnSecondProduct();
+
+    }
+
 }

@@ -29,6 +29,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//android.widget.AutoCompleteTextView[@text='Search on eBay']")
     WebElement searchBar;
 
+    @FindBy(xpath = "//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_button\"]")
+    WebElement allowButton;
+
 
     public void openApplication() {
         if (isDisplayed(closeIcon)) {
@@ -37,6 +40,9 @@ public class HomePage extends BasePage {
     }
 
     public boolean isHomePageDispalyed() {
+        if(isPresent(allowButton)){
+            allowButton.click();
+        }
         return isDisplayed(searchTab);
     }
 
@@ -66,9 +72,9 @@ public class HomePage extends BasePage {
     }
 
     public void clickOnNavigationTab(String tabOption) {
+
         String xpath = "//android.widget.TextView[@text= '%s']";
         xpath = String.format(xpath, tabOption);
-
         driver.findElement(By.xpath(xpath)).click();
 
 

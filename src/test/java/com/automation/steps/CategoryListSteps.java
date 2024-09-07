@@ -1,6 +1,7 @@
 package com.automation.steps;
 
 import com.automation.pages.CategoryListPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -18,4 +19,8 @@ public class CategoryListSteps {
         categoryListPage.clickOnTheProductSubCategory(subCategory);
     }
 
+    @And("click on {string} from inner sub category")
+    public void clickOnFromInnerSubCategory(String innerSubCategory) {
+        categoryListPage.clickOnTheProductInnerSubCategory(innerSubCategory);
+    }
 }

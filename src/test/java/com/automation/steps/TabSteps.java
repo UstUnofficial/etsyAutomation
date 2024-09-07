@@ -2,6 +2,7 @@ package com.automation.steps;
 
 import com.automation.pages.TabPage;
 import com.automation.utils.ConfigReader;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -36,6 +37,11 @@ public class TabSteps {
 
         tabPage.clickOnSettings();
         
+    }
+
+    @And("user click on watchlist")
+    public void userClickOnWatchlist() {
+        tabPage.clickOnWatchlist();
     }
 
 

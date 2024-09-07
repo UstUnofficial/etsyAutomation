@@ -36,6 +36,7 @@ public class BasePage {
         try {
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+
             System.out.println(element.isDisplayed());
             return element.isDisplayed();
 
