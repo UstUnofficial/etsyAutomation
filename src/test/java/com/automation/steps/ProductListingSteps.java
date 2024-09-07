@@ -32,10 +32,10 @@ public class ProductListingSteps {
 
 
 
-    @When("user apply filter option {string}")
-    public void userApplyFilterOption(String category) {
-        productListingPage.LaptopFiltering(category);
-    }
+//    @When("user apply filter option {string}")
+//    public void userApplyFilterOption(String category) {
+//        productListingPage.LaptopFiltering(category);
+//    }
 
     @And("user apply subCategory {string} from category")
     public void userApplySubCategoryFromCategory(String subCategory) {
