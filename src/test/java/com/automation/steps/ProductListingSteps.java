@@ -2,6 +2,7 @@ package com.automation.steps;
 
 import com.automation.pages.ProductListingPage;
 import com.automation.utils.ConfigReader;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -30,17 +31,31 @@ public class ProductListingSteps {
     }
 
 
-    @When("user apply filter options")
-    public void userApplyFilterOptions() {
-        productListingPage.LaptopFiltering();
+
+    @When("user apply filter option {string}")
+    public void userApplyFilterOption(String category) {
+        productListingPage.LaptopFiltering(category);
     }
 
-    @Then("verify the product are displayed based on filtering")
-    public void verifyTheProductAreDisplayedBasedOnFiltering() {
-        Assert.assertTrue(productListingPage.isLaptopFiltered());
-
+    @And("user apply subCategory {string} from category")
+    public void userApplySubCategoryFromCategory(String subCategory) {
+        productListingPage.subFiltering(subCategory);
     }
 
+    @And("user apply subCategory {string} from Shipping category")
+    public void userApplySubCategoryFromShippingCategory(String subCategory) {
+        productListingPage.subFilteringFromShipping(subCategory);
+    }
+
+    @Then("verify the product are displayed contains {string} based on filtering")
+    public void verifyTheProductAreDisplayedContainsBasedOnFiltering(String data) {
+        Assert.assertTrue(productListingPage.isLaptopFiltered(ConfigReader.getValue(data)));
+    }
+
+    @And("user search for result")
+    public void userSearchForResult() {
+        productListingPage.clickOnSearchBtn();
+    }
 
     @When("user apply filter option {string}")
     public void user_apply_filter_option(String filter) {
@@ -64,7 +79,10 @@ public class ProductListingSteps {
     public void verifyPriceIsSortedNotInOrder(String sortingOption) {
 
         Assert.assertFalse(productListingPage.isPriceSortedIn(ConfigReader.getValue(sortingOption)));
-
+    }
+    @Then("verify the product are displayed contains {string}  and {string} based on filtering")
+    public void verifyTheProductAreDisplayedContainsAndBasedOnFiltering(String data1, String data2) {
+        Assert.assertTrue(productListingPage.isLaptopFilteredByTwoCondition(ConfigReader.getValue(data1),ConfigReader.getValue(data2)));
 
     }
 }

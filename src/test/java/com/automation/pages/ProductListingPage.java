@@ -22,20 +22,20 @@ public class ProductListingPage extends BasePage {
     @FindBy(xpath = "//android.widget.Button[@content-desc='Filter']")
     WebElement filterTab;
 
-    @FindBy(xpath = "//android.widget.TextView[@text='Condition']")
-    WebElement categoryTab;
-
-    @FindBy(xpath = "//android.widget.TextView[@text='Good - Refurbished']")
-    WebElement refurbished;
 
     @FindBy(xpath = "//android.widget.Button[@resource-id='com.ebay.mobile:id/call_to_action_button']")
     WebElement showResultBtn;
+
 
     @FindBy(id = "com.ebay.mobile:id/button_sort")
     WebElement sortingTab;
 
     @FindBy(xpath = "(//android.widget.TextView[@resource-id = 'com.ebay.mobile:id/textview_primary_0']//ancestor::android.view.ViewGroup[@resource-id=\"com.ebay.mobile:id/cell_collection_item\"])[1]")
     WebElement firstElementCard;
+
+    @FindBy(xpath = "//android.widget.ImageButton[@content-desc='Back to all refinements']")
+    WebElement filterBackButton;
+
 
     @FindBy(xpath = "(//android.widget.TextView[@text=\"Sponsored\"])[1]")
     WebElement sponsorTag;
@@ -80,6 +80,7 @@ public class ProductListingPage extends BasePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         String xpath = "//android.widget.Button[contains(@content-desc,'%s')]";
         xpath = String.format(xpath, brandName);
         driver.findElement(By.xpath(xpath)).click();
@@ -99,6 +100,7 @@ public class ProductListingPage extends BasePage {
             String currentData1 = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.ebay.mobile:id/textview_header_0' and @text]")).getText().toLowerCase();
             String currentData2 = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.ebay.mobile:id/textview_subheader_0' and @text]")).getText().toLowerCase();
             String brandName = ConfigReader.getValue("brand.name").toLowerCase();
+
             System.out.println(currentData1 + "////////////");
             System.out.println(currentData2);
             System.out.println(brandName + "00000000000000000000");
@@ -106,6 +108,11 @@ public class ProductListingPage extends BasePage {
                 continue;
             } else if (!(currentData1.contains(brandName) || currentData2.contains(brandName))) {
                 System.out.println(brandName + "-------------");
+            }
+            if(isPresent(sponsoredTag)){
+                continue;
+            } else if (!(currentData1.contains(brandName)||currentData2.contains(brandName))) {
+
                 return false;
             }
 
@@ -121,19 +128,79 @@ public class ProductListingPage extends BasePage {
 
     }
 
-    public void LaptopFiltering() {
-        filterTab.click();
-        categoryTab.click();
-        refurbished.click();
+    public void LaptopFiltering(String filterCategory) {
+
 
         if (isDisplayed(showResultBtn)) {
             showResultBtn.click();
         }
+        if(isPresent(filterTab)){
+            filterTab.click();
+        }
 
+        if(isPresent(filterBackButton)){
+            filterBackButton.click();
+        }
+        String xpath = "//android.widget.TextView[@text='%s']";
+        xpath = String.format(xpath, filterCategory);
+        driver.findElement(By.xpath(xpath)).click();
+    }
+
+    public void subFiltering(String subCategory){
+        String xpath = "//android.widget.TextView[@text='%s']";
+        xpath = String.format(xpath, subCategory);
+        driver.findElement(By.xpath(xpath)).click();
 
     }
 
-    public boolean isLaptopFiltered() {
+    public boolean isLaptopFiltered(String data) {
+        List<WebElement> currentProductList = driver.findElements(By.xpath("//android.view.ViewGroup[@resource-id='com.ebay.mobile:id/cell_collection_item']"));
+
+        int x = currentProductList.get(0).getLocation().getX();
+        int y = currentProductList.get(0).getLocation().getY();
+        int cardWidth = currentProductList.get(0).getSize().getWidth();
+        int cardHeight = currentProductList.get(0).getSize().getHeight();
+        for(int i=0;i<=5;i++){
+
+            String xpath = "//android.widget.TextView[contains(@content-desc,'%s')]";
+            xpath = String.format(xpath, data);
+            WebElement refurbishedText = driver.findElement(By.xpath(xpath));
+
+             if (!isDisplayed(refurbishedText)) {
+                return false;
+             }
+
+            scrollOrSwipe(cardWidth/2,cardHeight/2,cardWidth/2,0);
+
+//            currentProductList =  driver.findElements(By.xpath("//android.view.ViewGroup[@resource-id='com.ebay.mobile:id/cell_collection_item']"));
+        }
+
+        return true;
+    }
+
+    public boolean isLaptopFilteredByTwoCondition(String data1, String data2) {
+        List<WebElement> currentProductList = driver.findElements(By.xpath("//android.view.ViewGroup[@resource-id='com.ebay.mobile:id/cell_collection_item']"));
+
+        int x = currentProductList.get(0).getLocation().getX();
+        int y = currentProductList.get(0).getLocation().getY();
+        int cardWidth = currentProductList.get(0).getSize().getWidth();
+        int cardHeight = currentProductList.get(0).getSize().getHeight();
+        for(int i=0;i<=5;i++){
+
+            String xpath = "//android.widget.TextView[contains(@content-desc,'%s')]";
+            xpath = String.format(xpath, data1);
+            WebElement conditionText1 = driver.findElement(By.xpath(xpath));
+
+            xpath = String.format(xpath, data2);
+            WebElement conditionText2 =  driver.findElement(By.xpath(xpath));
+
+            if (!(isDisplayed(conditionText1)&&(isDisplayed(conditionText2)))) {
+                return false;
+            }
+
+            scrollOrSwipe(cardWidth/2,cardHeight/2,cardWidth/2,0);
+        }
+
         return true;
     }
 
@@ -256,5 +323,26 @@ public class ProductListingPage extends BasePage {
         System.out.println("from the site :"+priceList);
 
         return priceListCopy.equals(priceList);
+    }
+
+    public void subFilteringFromShipping(String subCategory) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        String xpath = "//android.widget.Switch[@text='%s']";
+        xpath = String.format(xpath, subCategory);
+        WebElement subCategoryText = driver.findElement(By.xpath(xpath));
+        if(isDisplayed(subCategoryText)){
+            subCategoryText.click();
+        }
+
+    }
+
+    public void clickOnSearchBtn() {
+        if(isDisplayed(showResultBtn)){
+            showResultBtn.click();
+        }
     }
 }
