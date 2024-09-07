@@ -32,10 +32,17 @@ public class ProductListingSteps {
 
 
 
+
+    @When("user apply laptop filter option {string}")
+    public void userApplyLaptopFilterOption(String category) {
+        productListingPage.laptopFiltering(category);
+    }
+
 //    @When("user apply filter option {string}")
 //    public void userApplyFilterOption(String category) {
 //        productListingPage.LaptopFiltering(category);
 //    }
+
 
     @And("user apply subCategory {string} from category")
     public void userApplySubCategoryFromCategory(String subCategory) {
@@ -85,4 +92,27 @@ public class ProductListingSteps {
         Assert.assertTrue(productListingPage.isLaptopFilteredByTwoCondition(ConfigReader.getValue(data1),ConfigReader.getValue(data2)));
 
     }
+
+    @And("user select color as {string}")
+    public void userSelectColorAs(String arg0) {
+    }
+
+    @And("user select gender as {string}")
+    public void userSelectGenderAs(String arg0) {
+    }
+
+    @And("user click on first product")
+    public void userClickOnFirstProduct() {
+        productListingPage.clickOnFirstProduct();
+
+    }
+    @And("user click on second product")
+    public void userClickOnSecondProduct() {
+
+
+
+        productListingPage.clickOnSecondProduct();
+
+    }
+
 }

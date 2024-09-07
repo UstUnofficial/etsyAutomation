@@ -4,7 +4,7 @@ Feature: Laptop Filter Functionality
     Then verify user is on home Page
     When user search for product "product2.name"
     Then verify user is on "product2.name" product page
-    When user apply filter option "Condition"
+    When user apply laptop filter option "Condition"
     And user apply subCategory "Good - Refurbished" from category
     And user search for result
     Then verify the product are displayed contains "Refurbished.Data" based on filtering
@@ -14,7 +14,7 @@ Feature: Laptop Filter Functionality
     Then verify user is on home Page
     When user search for product "product2.name"
     Then verify user is on "product2.name" product page
-    When user apply filter option "Shipping Options"
+    When user apply laptop filter option "Shipping Options"
     And user apply subCategory "Free Shipping" from Shipping category
     And user search for result
     Then verify the product are displayed contains "FreeShipping.data" based on filtering
@@ -25,9 +25,9 @@ Feature: Laptop Filter Functionality
     Then verify user is on home Page
     When user search for product "product2.name"
     Then verify user is on "product2.name" product page
-    When user apply filter option "Condition"
+    When user apply laptop filter option "Condition"
     And user apply subCategory "Good - Refurbished" from category
-    When user apply filter option "Shipping Options"
+    When user apply laptop filter option "Shipping Options"
     And user apply subCategory "Free International Shipping" from Shipping category
     And user search for result
     Then verify the product are displayed contains "Refurbished.Data"  and "FreeShipping.data" based on filtering
