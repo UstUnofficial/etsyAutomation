@@ -11,7 +11,7 @@ public class CategoryListPage extends BasePage{
 
     @FindBy(xpath = "//android.widget.TextView[@resource-id='com.ebay.mobile:id/textview_category' and @text")
     WebElement productCategoryTitles;
-
+    
 //    public  void scrollTheWindow(WebElement element){
 //        Dimension dimension=driver.manage().window().getSize();
 //        int width = dimension.getWidth();
