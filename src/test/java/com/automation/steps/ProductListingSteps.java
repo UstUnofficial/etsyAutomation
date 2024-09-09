@@ -115,4 +115,13 @@ public class ProductListingSteps {
 
     }
 
+    @When("user shop the product by size {string}")
+    public void userShopTheProductBySize(String size) {
+        productListingPage.clickOnSize(size);
+    }
+
+    @And("user shop the product by sleeve length {string}")
+    public void userShopTheProductBySleeveLength(String sleeveSize) {
+        productListingPage.selectSleevSize(sleeveSize);
+    }
 }

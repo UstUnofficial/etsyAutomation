@@ -40,7 +40,7 @@ public class HomePage extends BasePage {
     }
 
     public boolean isHomePageDispalyed() {
-        if(isPresent(allowButton)){
+        if(isDisplayed(allowButton)){
             allowButton.click();
         }
         return isDisplayed(searchTab);

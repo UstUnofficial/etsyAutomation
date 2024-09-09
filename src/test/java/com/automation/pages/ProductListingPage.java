@@ -362,4 +362,17 @@ public class ProductListingPage extends BasePage {
         scrollOrSwipe(width/2,height/2,width/2,0);
         firstProduct.get(1).click();
     }
+
+    public void clickOnSize(String size) {
+        String xpath = "//android.widget.Button[@text='%s']";
+        xpath = String.format(xpath, size);
+         driver.findElement(By.xpath(xpath)).click();
+
+    }
+
+    public void selectSleevSize(String sleeveSize) {
+        String xpath = "//android.widget.Button[@text='%s']";
+        xpath = String.format(xpath, sleeveSize);
+        driver.findElement(By.xpath(xpath)).click();
+    }
 }

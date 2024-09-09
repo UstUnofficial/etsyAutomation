@@ -45,5 +45,9 @@ public class TabSteps {
     }
 
 
+    @And("user click on Recently viewed")
+    public void userClickOnRecentlyViewed() {
+        tabPage.clickOnRecentlyViewed();
 
+    }
 }

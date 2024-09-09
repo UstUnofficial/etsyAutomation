@@ -25,6 +25,9 @@ public class TabPage extends BasePage{
     @FindBy(xpath = "//android.widget.TextView[@text=\"Watchlist\"]")
     WebElement watchlistLink;
 
+    @FindBy(xpath = "//android.widget.TextView[@text=\"Recently viewed\"]")
+    WebElement recentlyViewedLink;
+
 
 
     public boolean isTabDisplayed(String tabOption) {
@@ -71,6 +74,21 @@ public class TabPage extends BasePage{
 
     public void clickOnWatchlist() {
         watchlistLink.click();
+
+    }
+
+    public void clickOnRecentlyViewed() {
+        Dimension dimension = driver.manage().window().getSize();
+        int x = dimension.getWidth();
+        int y = dimension.getHeight();
+
+
+        while(!isPresent(recentlyViewedLink)){
+
+            scrollOrSwipe(x/2, y/2, x/2, 0);
+
+        }
+        recentlyViewedLink.click();
 
     }
 }
